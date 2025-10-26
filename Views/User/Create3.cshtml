@@ -1,0 +1,16 @@
+﻿@model RoutingDemo.Models.User
+@* Does not give me enough control - annotations (to be taught later) will help later but still I need more control *@
+<div>
+    @{
+        Html.BeginForm("CreateUser", "User", FormMethod.Post);
+    }
+    <h3>User registration</h3>
+    <div>
+        @Html.EditorForModel()
+    </div>
+    <input type="submit" value="Create User" />
+    @{
+        Html.EndForm();
+    }
+    
+</div>

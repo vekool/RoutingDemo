@@ -1,0 +1,30 @@
+﻿@model RoutingDemo.Models.User
+
+<div>
+    @{
+        Html.BeginForm("CreateUser", "User", FormMethod.Post);
+    }
+    <h3>User registration</h3>
+    <div>
+       @Html.LabelFor(x => x.fullname)
+       @Html.EditorFor(x => x.fullname)
+    </div>
+    <div>
+        @Html.LabelFor(x => x.age, "Age in Years")
+        @Html.EditorFor(x => x.age)
+        @* EditorFor will look at the datatype and infer that it is a number*@ 
+    </div>
+    <div>
+        @Html.LabelFor(x => x.address)
+        @Html.TextAreaFor(x => x.address, new { rows = "5", cols = "30" })
+    </div>
+    <div>
+        @Html.LabelFor(x => x.email,"Primary Email")
+        @Html.EditorFor(x => x.email, new {@type="email"})
+    </div>
+    <input type="submit" value="Create User" />
+    @{
+        Html.EndForm();
+    }
+    
+</div>

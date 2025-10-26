@@ -1,0 +1,12 @@
+﻿@model RoutingDemo.Models.User
+@* The data from the controller will be passed to the view in this format *@
+
+<h3>User Data</h3>
+<p>Name: @Model.fullname</p>
+<p>Email: @Model.email</p>
+<p>Age: @Model.age</p>
+<p>Address
+    <pre>
+        @Model.address
+    </pre>
+</p>

@@ -1,0 +1,14 @@
+﻿<h1>Generating The table</h1>
+<hr />
+<ul>
+    @{
+        int num = ViewBag.Num;
+        int m, ans = 0;
+
+        for(m = 1; m <= 10; m++)
+        {
+            ans = num * m;
+            <li>@num x @m = @ans</li>
+        }    
+    }
+</ul>

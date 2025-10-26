@@ -1,0 +1,23 @@
+﻿<h1>Discount</h1>
+<hr />
+<ul>
+    <li>Amount: @ViewBag.Amount</li>
+    @{
+        if(ViewBag.Disc == 0)
+        {
+            <li>No Discount</li>
+        }
+        else
+        {
+            <li>Discount: @ViewBag.Disc</li>
+        }
+    }
+    <li>Final: @ViewBag.Final</li>
+
+</ul>
+@* Razor Syntax - 
+    C# code in HTML
+
+    1) To print values use @ (inline expressions)
+    2) To use C# logic use @{}
+*@

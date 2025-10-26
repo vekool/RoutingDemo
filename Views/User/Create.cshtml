@@ -1,0 +1,24 @@
+﻿<div>
+    <h3>User registration</h3>
+
+    <form action="/User/CreateUser" method="post">
+        <div>
+            <label for="fullname"><b>Full Name</b></label>
+            <input name="fullname" id="fullname" type="text" />
+        </div>
+        <div>
+            <label for="age"><b>Age in years</b></label>
+            <input name="age" id="age" type="number" />
+        </div>
+        <div>
+            <label for="address"><b>Address</b></label>
+            <textarea name="address" id="address" rows="5" cols="30"></textarea>
+        </div>
+        <div>
+            <label for="email"><b>Email</b></label>
+            <input name="email" id="email" type="email" />
+        </div>
+        <hr />
+        <input type="submit" value="Create User" />
+    </form>
+</div>
