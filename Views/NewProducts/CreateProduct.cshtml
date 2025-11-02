@@ -24,6 +24,13 @@
         </div>
     </div>
     <div class="mt-3">
+        <label asp-for="EDate" class="col-form-label"></label>
+        <input asp-for="EDate" class="form-control" asp-format="{0:yyyy-MM-dd}" type="date" />
+        <div>
+            <span asp-validation-for="EDate" class="text-danger text-sm-start"></span>
+        </div>
+    </div>
+    <div class="mt-3">
         <label asp-for="EmailAddress" class="col-form-label"></label>
         <input asp-for="EmailAddress" class="form-control" type="email" />
         <div>

@@ -4,6 +4,7 @@ namespace RoutingDemo
     {
         public static void Main(string[] args)
        {
+            //this is what our website is - a web app - 
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.

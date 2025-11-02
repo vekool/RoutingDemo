@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using RoutingDemo.Models.CustomValidators;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RoutingDemo.Models
 {
@@ -6,6 +8,8 @@ namespace RoutingDemo.Models
 	{
 		//treat this as a database primary key
 		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		//Identity(1, 1) - AUTO_INCREMENT
 		public int Id { get; set; }
 
 		[Required(ErrorMessage = "Product Name cannot be empty or blank")]
@@ -25,6 +29,13 @@ namespace RoutingDemo.Models
 		public DateTime MDate { get; set; } = DateTime.Now;
 
 		[Required]
+		[DataType(DataType.Date)]
+		[Display(Name = "Expiry Date")]
+		[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd", ApplyFormatInEditMode = true)]
+		[CustomValidation(typeof(ProductValidator),"ValidateExpiryDate")]
+		public DateTime EDate { get; set; } = DateTime.Now.AddDays(1);
+
+		[Required]
 		[EmailAddress(ErrorMessage ="Invalid email address")]
 		[StringLength(50)]
 		[Display(Name="Contact Email")]
@@ -41,4 +52,9 @@ namespace RoutingDemo.Models
 		[Display(Name="Product Image")]
 		public string? Image { get; set; }
 	}
+	//ORM Framework
+	//Object Relational Mapping Framework
+	//		Entity Framework
+	//localdb
+
 }
