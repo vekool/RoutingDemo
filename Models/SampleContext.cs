@@ -3,8 +3,15 @@
 namespace RoutingDemo.Models
 {
 	//Model of the database - database structure
+
 	public class SampleContext:DbContext
 	{
+		//provided by framework
+		public SampleContext(DbContextOptions options):base(options)
+		{
+			
+		}
+		//this models the database table named Products
 		public DbSet<Product> Products { get; set; }
 	}
 
@@ -18,6 +25,10 @@ namespace RoutingDemo.Models
 			Login with windows credentials
 
 		Connect Timeout=30
-			Disconnect if server is unresponsive for 30 seconds
+			Disconnect if server is unresponsive for 30 seconds	 
+	 add-migration InitialDB
+	update-database
+
+	you can write update-database -v (it will show all commands run)
 	 */
 }

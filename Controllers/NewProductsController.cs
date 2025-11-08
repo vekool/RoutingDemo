@@ -6,6 +6,15 @@ namespace RoutingDemo.Controllers
 	[Route("NewProducts")]
 	public class NewProductsController : Controller
 	{
+		
+		private readonly SampleContext ctx;
+
+		//dependency injection ->
+		//you framework autmatically passes the context to this controller
+		public NewProductsController(SampleContext c)
+		{
+			ctx = c;
+		}
 		[HttpGet("Create")]
 		public IActionResult CreateProduct()
 		{
@@ -24,7 +33,12 @@ namespace RoutingDemo.Controllers
 				return View(p);
 			}
 			//everything ok - now add to database
+			ctx.Products.Add(p);
+			ctx.SaveChanges(); //commit
 			return View(new Product());
 		}
 	}
 }
+//Migrations
+//Step by Step
+//Tools -> NPM -> Package Manager Console
