@@ -3,6 +3,8 @@ using RoutingDemo.Models;
 
 namespace RoutingDemo.Controllers
 {
+
+	
 	[Route("NewProducts")]
 	public class NewProductsController : Controller
 	{
@@ -14,6 +16,12 @@ namespace RoutingDemo.Controllers
 		public NewProductsController(SampleContext c)
 		{
 			ctx = c;
+		}
+
+		[HttpGet]
+		public IActionResult GetAll()
+		{
+			return View(ctx.Products.ToList());
 		}
 		[HttpGet("Create")]
 		public IActionResult CreateProduct()
@@ -37,6 +45,54 @@ namespace RoutingDemo.Controllers
 			ctx.SaveChanges(); //commit
 			return View(new Product());
 		}
+		[HttpGet("EditProduct")]
+		public IActionResult EditProduct(int? id)
+		{
+			if(id == null)
+			{
+				return NotFound();
+			}
+			Product? p = ctx.Products.Where(x => x.Id == id.Value).FirstOrDefault();
+
+			if (p == null)
+			{ 
+				return NotFound();
+			}
+			return View(p);
+		}
+		[HttpGet("DeleteProduct")]
+		public IActionResult DeleteProduct(int? id)
+		{
+			if (id == null)
+			{
+				return NotFound();
+			}
+			Product? p = ctx.Products.Where(x => x.Id == id.Value).FirstOrDefault();
+
+			if (p == null)
+			{
+				return NotFound();
+			}
+			ctx.Products.Remove(p);
+			ctx.SaveChanges();
+			return RedirectToAction(nameof(GetAll));
+		}
+		[HttpPost("EditProduct")]
+		public IActionResult EditProduct(Product p)
+		{
+			if (!ModelState.IsValid) return View(p);
+
+			Product? old = ctx.Products.Where(x => x.Id == p.Id).SingleOrDefault();
+
+			if (old == null)
+			{
+				return NotFound();
+			}
+			ctx.Entry(old).CurrentValues.SetValues(p);
+			ctx.SaveChanges();
+			return RedirectToAction(nameof(GetAll));
+		}
+			
 	}
 }
 //Migrations

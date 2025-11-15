@@ -1,0 +1,62 @@
+﻿@model RoutingDemo.Models.Product
+
+@* Tag helpers *@
+<form asp-controller="NewProducts" asp-action="EditProduct" method="post" class="container mt-4 shadow pb-5 pt-5" style="width:500px;">
+    <div class="mt-3">
+        @* We need to store the id in a hidden field as ouur edit request will require the id (which is to be edited)*@
+        <input asp-for="Id" type="hidden" style="display:none;" />
+        <label asp-for="Name" class="col-form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <div>
+            <span asp-validation-for="Name" class="text-danger text-sm-start"></span>
+        </div>
+    </div>
+    <div class="mt-3">
+        <label asp-for="Price" class="col-form-label"></label>
+        <input asp-for="Price" class="form-control" />
+        <div>
+            <span asp-validation-for="Price" class="text-danger text-sm-start"></span>
+        </div>
+    </div>
+    <div class="mt-3">
+        <label asp-for="MDate" class="col-form-label"></label>
+        <input asp-for="MDate" class="form-control" asp-format="{0:yyyy-MM-dd}" type="date" />
+        <div>
+            <span asp-validation-for="MDate" class="text-danger text-sm-start"></span>
+        </div>
+    </div>
+    <div class="mt-3">
+        <label asp-for="EDate" class="col-form-label"></label>
+        <input asp-for="EDate" class="form-control" asp-format="{0:yyyy-MM-dd}" type="date" />
+        <div>
+            <span asp-validation-for="EDate" class="text-danger text-sm-start"></span>
+        </div>
+    </div>
+    <div class="mt-3">
+        <label asp-for="EmailAddress" class="col-form-label"></label>
+        <input asp-for="EmailAddress" class="form-control" type="email" />
+        <div>
+            <span asp-validation-for="EmailAddress" class="text-danger text-sm-start"></span>
+        </div>
+    </div>
+    <div class="mt-3">
+        <label asp-for="Image" class="col-form-label"></label>
+        <input asp-for="Image" class="form-control" type="file" />
+        <div>
+            <span asp-validation-for="Image" class="text-danger text-sm-start"></span>
+        </div>
+    </div>
+    <div class="mt-3">
+        <label asp-for="SKU" class="col-form-label"></label>
+        <input asp-for="SKU" class="form-control" />
+        <div>
+            <span asp-validation-for="SKU" class="text-danger text-sm-start"></span>
+        </div>
+    </div>
+    <hr />
+    <input type="submit" value="Edit" class="btn btn-primary mt-3" />
+</form>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>

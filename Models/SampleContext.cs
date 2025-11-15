@@ -13,6 +13,8 @@ namespace RoutingDemo.Models
 		}
 		//this models the database table named Products
 		public DbSet<Product> Products { get; set; }
+		public DbSet<Order> Orders { get; set; }
+		public DbSet<OrderDetails> OrderDetails { get; set; }
 	}
 
 	/* Data Source=(localdb)\\MSSQLLocalDB;
