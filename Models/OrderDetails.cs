@@ -19,5 +19,11 @@ namespace RoutingDemo.Models
 		public virtual Order Order { get; set; }
 		[ForeignKey(nameof (ProductId))]
 		public virtual Product Product { get; set; }
+
+		[Required]
+		public double Quantity { get; set; }
+
+		[Required]
+		public double Rate { get; set; }
 	}
 }

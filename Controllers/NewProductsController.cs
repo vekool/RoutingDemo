@@ -52,6 +52,10 @@ namespace RoutingDemo.Controllers
 			{
 				return NotFound();
 			}
+			//LINQ -> Language Integrated Query
+			//Product p = (from p int ctx.Products
+			//				where p.id == id.Value
+			//				select p).FirstOrDefault();
 			Product? p = ctx.Products.Where(x => x.Id == id.Value).FirstOrDefault();
 
 			if (p == null)

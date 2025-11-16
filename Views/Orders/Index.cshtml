@@ -1,0 +1,35 @@
+﻿@using RoutingDemo.Models.ViewModel
+@model List<AllOrdersVM>
+
+<div class="container mt-4">
+  
+    <table class="table table-light table-striped">
+        <tr>
+            <th style="display:none;"></th>
+            <th>Product Name</th>
+            <th>Order Number</th>
+            <th>Order Date</th>
+            <th>Quantity</th>
+            <th>Rate</th>
+            <th>Actions</th>
+        </tr>
+       
+            @{
+                foreach (AllOrdersVM p in Model)
+                {
+                    <tr>
+                        <td style="display:none;">@p.ODId</td>
+                        <td>@p.Name</td>
+                        <td>@p.OID</td>
+                        <td>@p.OrderDate</td>
+                        <td>@p.Quantity</td>
+                        <td>@p.Rate</td>
+                        <td>
+                       
+                        </td>
+                    </tr>
+                }
+            }
+     
+    </table>
+</div>
