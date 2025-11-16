@@ -1,0 +1,43 @@
+﻿@using RoutingDemo.Models.ViewModel
+@model OrderEditVM
+
+<form asp-controller="NewProducts" asp-action="Create" method="post" class="container mt-4 shadow pb-5 pt-5" style="width:500px;">
+    <div class="mt-3">
+        <label asp-for="OrderDate" class="col-form-label"></label>
+        <input asp-for="OrderDate" class="form-control" />
+        <div>
+            <span asp-validation-for="OrderDate" class="text-danger text-sm-start"></span>
+        </div>
+    </div>
+    <div class="mt-3">
+        <label asp-for="OrderId" class="col-form-label"></label>
+        <span>@Model.OrderId</span>
+    </div>
+    <div class="mt-3">
+        <table class="table table-light table-striped">
+            <tr>
+                <th style="display:none;"></th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Rate</th>
+                <th>Actions</th>
+            </tr>
+            @{
+                foreach (OrderDetailsWithProduct r in Model.OrderDetailRows)
+                {
+                    <tr>
+                        <td>@r.ODId</td>
+                        <td>@r.ProductName</td>
+                        <td>@r.Quantity</td>
+                        <td>@r.Rate</td>
+                        <td></td>
+                    </tr>
+                }
+            }
+            
+    </div>
+</form>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>

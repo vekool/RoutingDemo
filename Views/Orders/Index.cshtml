@@ -2,7 +2,7 @@
 @model List<AllOrdersVM>
 
 <div class="container mt-4">
-  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <table class="table table-light table-striped">
         <tr>
             <th style="display:none;"></th>
@@ -25,7 +25,12 @@
                         <td>@p.Quantity</td>
                         <td>@p.Rate</td>
                         <td>
-                       
+                            <a asp-action="OrderDetailsFor" asp-controller="Orders" asp-route-oid="@p.OID" class="ms-3">
+                                <i class="fa-solid fa-pen-to-square text-primary"></i>
+                            </a>
+                            <a asp-action="DeleteOrder" asp-controller="Orders" asp-route-oid="@p.OID" class="ms-3">
+                                <i class="fa-solid fa-trash text-danger"></i>
+                            </a>
                         </td>
                     </tr>
                 }
