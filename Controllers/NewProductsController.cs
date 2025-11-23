@@ -12,7 +12,7 @@ namespace RoutingDemo.Controllers
 		private readonly SampleContext ctx;
 
 		//dependency injection ->
-		//you framework autmatically passes the context to this controller
+		//you framework automatically passes the context to this controller
 		public NewProductsController(SampleContext c)
 		{
 			ctx = c;

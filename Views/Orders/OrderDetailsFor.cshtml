@@ -26,7 +26,7 @@
                 foreach (OrderDetailsWithProduct r in Model.OrderDetailRows)
                 {
                     <tr>
-                        <td>@r.ODId</td>
+                        <td style="display:none;">@r.ODId</td>
                         <td>@r.ProductName</td>
                         <td>@r.Quantity</td>
                         <td>@r.Rate</td>
@@ -35,6 +35,10 @@
                 }
             }
             
+    </div>
+        <hr />
+    <div class="mt-3">
+        <a asp-action="AddOrderItem" asp-controller="OrderDetails" asp-route-orderid="@Model.OrderId">Add Item</a>
     </div>
 </form>
 
