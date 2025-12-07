@@ -1,0 +1,27 @@
+﻿@model List<RoutingDemo.Models.ViewModel.OrderDetailsWithProduct>;
+@{
+    double total = 0;
+}
+<tr>
+    <td></td>
+    <td>TOTAL</td>
+    @{
+        foreach (RoutingDemo.Models.ViewModel.OrderDetailsWithProduct r in Model)
+        {
+            total = total + (r.Quantity * r.Rate);
+        }
+     }
+     <td>@total</td>
+ </tr>
+
+ @* 
+     Identity Framework: Tables, Logic
+     Authentication: Who the user is?
+     Authorization: What can the user do?
+
+     ASpNetCore.Identity
+
+     Identity Framework will create 7 extra tables
+     in the database for user management
+
+ *@

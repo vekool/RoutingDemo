@@ -1,13 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace RoutingDemo.Models
 {
 	//Model of the database - database structure
 
-	public class SampleContext:DbContext
+	//Roles are added by default
+	public class SampleContext : IdentityDbContext<User>
 	{
 		//provided by framework
-		public SampleContext(DbContextOptions options):base(options)
+		public SampleContext(DbContextOptions options) : base(options)
 		{
 			
 		}
