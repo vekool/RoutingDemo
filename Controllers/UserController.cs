@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using RoutingDemo.Models;
+using RoutingDemo.Models.ViewModel;
 namespace RoutingDemo.Controllers
 {
 	[Route("User")]
@@ -31,6 +32,46 @@ namespace RoutingDemo.Controllers
 
 		//}
 		//Solution: use a model -> which mimics data
+		[HttpGet("Login")]
+		public ActionResult Login()
+		{
+			return View();
+		}
+
+		[HttpPost("Login")]
+		public async Task<IActionResult> Login(LoginViewModel model)
+		{
+			if (ModelState.IsValid)
+			{
+				var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe,false);
+
+				if (result.Succeeded)
+				{
+					return RedirectToAction("Index", controllerName: "Orders");
+				}
+				else if (result.IsLockedOut)
+				{
+					ModelState.AddModelError(string.Empty, "Your account is locked. Try again later.");
+				}
+				else if (result.RequiresTwoFactor)
+				{
+					ModelState.AddModelError(string.Empty, "Two-factor authentication is required.");
+				}
+				else if (result.IsNotAllowed)
+				{
+					ModelState.AddModelError(string.Empty, "You must confirm your email before logging in.");
+				}
+				else
+				{
+					ModelState.AddModelError(string.Empty, "Invalid email or password.");
+				}
+			}
+			else
+			{
+				ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
+			}
+			return View(model);
+		}
 		[HttpPost("CreateUser")]
 		public IActionResult CreateUser(User user)
 		{
@@ -101,6 +142,12 @@ namespace RoutingDemo.Controllers
 				
 			}
 			return View(u);
+		}
+		[HttpGet("Logout")]
+		public async Task<IActionResult> Logout()
+		{
+			await _signInManager.SignOutAsync();
+			return RedirectToAction("Index", "Home");
 		}
 	}
 }

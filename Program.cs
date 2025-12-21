@@ -21,7 +21,29 @@ namespace RoutingDemo
                     builder.Configuration.GetConnectionString("DefaultConnection")
                 )
             );
-            builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<SampleContext>();
+            builder.Services.AddIdentity<User, IdentityRole>(
+                options =>
+                {
+                    options.Password.RequireDigit = true;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequiredLength = 6;
+
+                    options.User.RequireUniqueEmail = true;
+                    //if user enters incorrect username / password 5 times, the account is locked out / disabled
+                    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                    options.Lockout.MaxFailedAccessAttempts = 5;
+                }
+            ).AddEntityFrameworkStores<SampleContext>()
+            .AddDefaultTokenProviders();
+
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/User/Login";
+                options.LogoutPath = "/User/Logout";
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+                options.SlidingExpiration = true;
+            });
 
             var app = builder.Build();
 
@@ -32,7 +54,7 @@ namespace RoutingDemo
             }
             //app supports routing
             app.UseRouting();
-
+            app.UseAuthentication(); //login / logout support
             //app supports authorization (later)
             app.UseAuthorization();
 
