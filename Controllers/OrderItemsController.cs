@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RoutingDemo.Models;
 using RoutingDemo.Models.ViewModel;
 
@@ -14,31 +15,31 @@ namespace RoutingDemo.Controllers
 			ctx = c;
 		}
 		[HttpGet("AddOrderItem")]
-		public IActionResult AddOrderItem(int? orderId)
+		public async Task<IActionResult> AddOrderItem(int? orderId)
 		{
 			if (orderId == null)
 			{
 				return NotFound();
 			}
-			Order? o = ctx.Orders.Where(x => x.Id == orderId).FirstOrDefault();
+			Order? o = await ctx.Orders.Where(x => x.Id == orderId).FirstOrDefaultAsync();
 
 			if (o == null) {
 				return NotFound();
 			}
 			OrderDetailsVM vm = new OrderDetailsVM();
 			vm.OrderId = o.Id;
-			vm.ProductList = (from p in ctx.Products
-							  orderby p.Name
-							  select new ProductMini
-							  {
-								  Id = p.Id,
-								  Name = p.Name
-							  }).ToList();
+			vm.ProductList = await (from p in ctx.Products
+									orderby p.Name
+									select new ProductMini
+									{
+										Id = p.Id,
+										Name = p.Name
+									}).ToListAsync();
 			return View(vm);	
 		}
 
 		[HttpPost("AddOrderItem")]
-		public IActionResult AddOrderItem(OrderDetailsVM? vm)
+		public async Task<IActionResult> AddOrderItem(OrderDetailsVM? vm)
 		{
 			if(vm == null)
 			{
@@ -53,7 +54,7 @@ namespace RoutingDemo.Controllers
 				oe.Quantity = vm.Quantity;
 
 				ctx.OrderDetails.Add(oe);
-				ctx.SaveChanges();
+				await ctx.SaveChangesAsync();
 				return RedirectToAction("OrderDetailsFor", "Orders", new { oid = vm.OrderId });
 			}
 			else

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using RoutingDemo.Models;
 using RoutingDemo.Models.ViewModel;
 namespace RoutingDemo.Controllers
@@ -143,11 +144,85 @@ namespace RoutingDemo.Controllers
 			}
 			return View(u);
 		}
+		[HttpGet("ForgotPassword")]
+		public IActionResult ForgotPassword()
+		{
+			return View(new ForgotPasswordVM());
+		}
+		[HttpPost("ForgotPassword")]
+		public async Task<IActionResult> ForgotPassword(ForgotPasswordVM v)
+		{
+			if (!ModelState.IsValid)
+			{
+				return View(v);
+			}
+			//Find the user
+			User u = await _userManager.FindByEmailAsync(v.Email);
+
+			if(u == null)
+			{
+				return RedirectToAction("Register");
+			}
+
+			var token = await _userManager.GeneratePasswordResetTokenAsync(u);
+			var resetLink = Url.Action("ResetPassword","User", new {email = v.Email, token = token});
+			//send email
+			//log it here
+			return RedirectToAction("ForgotPasswordConfirmation");
+
+
+		}
+		[HttpGet("ResetPassword")]
+		public IActionResult ResetPassword(string? token = null, string? email = null)
+		{
+			if (token == null || email == null)
+			{
+				return BadRequest("Email or token not provided");
+			}
+			return View(new ResetPasswordVM() { Email = email, Token = token });
+		}
+		[HttpPost("ResetPassword")]
+		public async Task<IActionResult> ResetPassword(ResetPasswordVM vm)
+		{
+			if (!ModelState.IsValid) return View(vm);
+
+			User u = await _userManager.FindByEmailAsync(vm.Email);
+			if(u == null)
+			{
+				return RedirectToAction("ForgotPassword");
+			}
+			var result = await _userManager.ResetPasswordAsync(u, vm.Token, vm.Password);
+
+			if (result.Succeeded)
+			{
+				//log this
+				return RedirectToAction("ResetPasswordConfirmation");
+			}
+			foreach (var e in result.Errors)
+			{
+				ModelState.AddModelError(string.Empty, e.Description);
+			}
+			return View(vm);
+
+		}
+		[HttpGet("ForgotPaswordConfirmation")]
+		public IActionResult ForgotPasswordConfirmation()
+		{
+			return View();
+		}
 		[HttpGet("Logout")]
 		public async Task<IActionResult> Logout()
 		{
 			await _signInManager.SignOutAsync();
 			return RedirectToAction("Index", "Home");
 		}
+
+		//ForgotPassword --> Email / username --> Send
+		//IF generates a token - and stores it in DB
+		//this token can be sent with the link to verify the user
+		//thhis token is short lived 10 mins
+		//link - Token (encrypted text)
+		//link is sent to user in a password reset mail
+		//if user clicks the mail - password is reset and new password screen is shown
 	}
 }

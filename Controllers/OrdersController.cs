@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RoutingDemo.Models;
 using RoutingDemo.Models.ViewModel;
 
@@ -15,9 +16,9 @@ namespace RoutingDemo.Controllers
 		}
 		[HttpGet("Index")]
 		[HttpGet]
-		public IActionResult Index()
+		public async Task<IActionResult> Index()
 		{
-			List<AllOrdersVM> data = (from p in ctx.Products
+			List<AllOrdersVM> data = await (from p in ctx.Products
 									  join od in ctx.OrderDetails on p.Id equals od.ProductId
 									  join o in ctx.Orders on od.OrderId equals o.Id
 									  select new AllOrdersVM
@@ -28,27 +29,27 @@ namespace RoutingDemo.Controllers
 										  OrderDate = o.OrderDate,
 										  Quantity = od.Quantity,
 										  Rate = od.Rate
-									  }).ToList();
+									  }).ToListAsync();
 			return View(data);
 		}
 		[HttpGet("{oid?}")]
-		public IActionResult OrderDetailsFor(int? oid)
+		public async Task<IActionResult> OrderDetailsFor(int? oid)
 		{
 			if (oid == null)
 			{
 				return BadRequest();
 			}
 
-			Order? Order = (from o in ctx.Orders
+			Order? Order = await (from o in ctx.Orders
 						   where o.Id == oid.Value
-						   select o).FirstOrDefault();
+						   select o).FirstOrDefaultAsync();
 			if (Order == null) {
 				return NotFound();
 			}
 			OrderEditVM ovm = new OrderEditVM();
 			ovm.OrderId = Order.Id;
 			ovm.OrderDate = Order.OrderDate;
-			ovm.OrderDetailRows = (from p in ctx.Products
+			ovm.OrderDetailRows =await (from p in ctx.Products
 								   join od in ctx.OrderDetails
 								   on p.Id equals od.ProductId
 								   where od.OrderId == Order.Id
@@ -58,7 +59,7 @@ namespace RoutingDemo.Controllers
 									   ProductName = p.Name,
 									   Quantity = od.Quantity,
 									   Rate = od.Rate
-								   }).ToList();
+								   }).ToListAsync();
 			
 			return View(ovm);
 		}
