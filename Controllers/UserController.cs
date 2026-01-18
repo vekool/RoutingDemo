@@ -122,6 +122,7 @@ namespace RoutingDemo.Controllers
 			return View(new User());
 		}
 		[HttpPost("Register")]
+		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Register(User u)
 		{
 			if (ModelState.IsValid)
