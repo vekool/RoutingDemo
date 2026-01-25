@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASP.NET MVC - Student Project</title>
+    <style>
+        /* VS Code Markdown Preview Style Template for Student Notes */
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #24292e;
+            background-color: #ffffff;
+            padding: 0 20px;
+            margin: 0 auto;
+            max-width: 980px;
+            word-wrap: break-word;
+        }
+
+        /* Headings */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: 600;
+            line-height: 1.25;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 2em;
+            padding-bottom: 0.3em;
+            border-bottom: 1px solid #eaecef;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            padding-bottom: 0.3em;
+            border-bottom: 1px solid #eaecef;
+        }
+
+        h3 {
+            font-size: 1.25em;
+        }
+
+        h4 {
+            font-size: 1em;
+        }
+
+        h5 {
+            font-size: 0.875em;
+        }
+
+        h6 {
+            font-size: 0.85em;
+            color: #6a737d;
+        }
+
+        /* Paragraphs and text */
+        p {
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+
+        /* Links */
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Lists */
+        ul,
+        ol {
+            padding-left: 2em;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+
+        li+li {
+            margin-top: 0.25em;
+        }
+
+        /* Code blocks */
+        code {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            font-size: 85%;
+            background-color: rgba(27, 31, 35, 0.05);
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+        }
+
+        pre {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            font-size: 85%;
+            line-height: 1.45;
+            background-color: #f6f8fa;
+            border-radius: 3px;
+            padding: 16px;
+            overflow: auto;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            font-size: 100%;
+        }
+
+        /* Blockquotes */
+        blockquote {
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+            margin: 0 0 16px 0;
+        }
+
+        blockquote> :first-child {
+            margin-top: 0;
+        }
+
+        blockquote> :last-child {
+            margin-bottom: 0;
+        }
+
+        /* Tables */
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+            margin-top: 0;
+            margin-bottom: 16px;
+            width: 100%;
+            overflow: auto;
+        }
+
+        table th {
+            font-weight: 600;
+            padding: 6px 13px;
+            border: 1px solid #dfe2e5;
+            background-color: #f6f8fa;
+        }
+
+        table td {
+            padding: 6px 13px;
+            border: 1px solid #dfe2e5;
+        }
+
+        table tr {
+            background-color: #ffffff;
+            border-top: 1px solid #c6cbd1;
+        }
+
+        table tr:nth-child(2n) {
+            background-color: #f6f8fa;
+        }
+
+        /* Horizontal rule */
+        hr {
+            height: 0.25em;
+            padding: 0;
+            margin: 24px 0;
+            background-color: #e1e4e8;
+            border: 0;
+        }
+
+        /* Images */
+        img {
+            max-width: 100%;
+            box-sizing: content-box;
+        }
+
+        /* Strong and emphasis */
+        strong {
+            font-weight: 600;
+        }
+
+        em {
+            font-style: italic;
+        }
+
+        /* Keyboard input */
+        kbd {
+            display: inline-block;
+            padding: 3px 5px;
+            font-size: 11px;
+            line-height: 10px;
+            color: #444d56;
+            vertical-align: middle;
+            background-color: #fafbfc;
+            border: 1px solid #d1d5da;
+            border-radius: 3px;
+            box-shadow: inset 0 -1px 0 #d1d5da;
+        }
+
+        /* Task lists */
+        input[type="checkbox"] {
+            margin-right: 0.5em;
+        }
+
+        /* Definition lists */
+        dl {
+            padding: 0;
+        }
+
+        dl dt {
+            padding: 0;
+            margin-top: 16px;
+            font-size: 1em;
+            font-style: italic;
+            font-weight: 600;
+        }
+
+        dl dd {
+            padding: 0 16px;
+            margin-bottom: 16px;
+        }
+
+        /* Details/Summary */
+        details {
+            margin-bottom: 16px;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* Highlight/Mark */
+        mark {
+            background-color: #fff3cd;
+            padding: 0.2em 0.4em;
+        }
+        .output-box {
+            background-color: #f9f9f9;
+            border: 2px solid #ddd;
+            border-left: 4px solid #4CAF50;
+            padding: 15px;
+            margin: 16px 0;
+            border-radius: 4px;
+        }
+
+        .output-box::before {
+            content: "Output:";
+            display: block;
+            font-weight: 600;
+            color: #4CAF50;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <h1>ASP.NET MVC - Student Project</h1>
+    <h2>Student Task Management System</h2>
+
+    <hr>
+
+    <h2>Project Overview</h2>
+    <p>Build a simple <strong>Student Task Management System</strong> using ASP.NET MVC (.NET 9.0). This project covers essential MVC concepts.</p>
+
+    <blockquote>
+        <p><strong>Note:</strong> Focus on functionality over aesthetics.</p>
+    </blockquote>
+
+    <hr>
+
+    <h2>Learning Objectives</h2>
+    <p>This project will test your understanding of:</p>
+    <ul>
+        <li>MVC Architecture - Models, Views, Controllers</li>
+        <li>Entity Framework Core - Code-First approach</li>
+        <li>Data Annotations and Validation</li>
+        <li>CRUD Operations - Create, Read, Update, Delete</li>
+        <li>LINQ Queries - Filtering and sorting data</li>
+        <li>Routing - Attribute routing with parameters</li>
+        <li>ViewBag - Passing data to views</li>
+        <li>Form Handling - GET and POST methods</li>
+    </ul>
+
+    <hr>
+
+    <h2>Project Requirements</h2>
+
+    <h3>1. Database Models (20 Points)</h3>
+    <p>Create the following models with proper data annotations:</p>
+
+    <h4>A. Student Model</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Validation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Id</td>
+                <td>int</td>
+                <td>Primary Key, Auto-increment</td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>string</td>
+                <td>Required, 3-50 characters</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>string</td>
+                <td>Required, Valid email format</td>
+            </tr>
+            <tr>
+                <td>RollNumber</td>
+                <td>string</td>
+                <td>Required, Unique</td>
+            </tr>
+            <tr>
+                <td>Department</td>
+                <td>string</td>
+                <td>Required</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h4>B. Task Model</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Property</th>
+                <th>Type</th>
+                <th>Validation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Id</td>
+                <td>int</td>
+                <td>Primary Key, Auto-increment</td>
+            </tr>
+            <tr>
+                <td>Title</td>
+                <td>string</td>
+                <td>Required, 5-100 characters</td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td>string</td>
+                <td>Required, MultilineText</td>
+            </tr>
+            <tr>
+                <td>DueDate</td>
+                <td>DateTime</td>
+                <td>Required, DataType.Date</td>
+            </tr>
+            <tr>
+                <td>Priority</td>
+                <td>string</td>
+                <td>Required (Low, Medium, High)</td>
+            </tr>
+            <tr>
+                <td>IsCompleted</td>
+                <td>bool</td>
+                <td>Default: false</td>
+            </tr>
+            <tr>
+                <td>StudentId</td>
+                <td>int</td>
+                <td>Foreign Key to Student</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h4>C. TaskContext (DbContext)</h4>
+    <p>Create a database context with:</p>
+    <ul>
+        <li>DbSet for Student</li>
+        <li>DbSet for Task</li>
+        <li>Connection string in appsettings.json</li>
+    </ul>
+
+    <hr>
+
+    <h3>2. Controllers and Actions (30 Points)</h3>
+
+    <h4>A. StudentsController</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Action</th>
+                <th>HTTP Method</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Index()</td>
+                <td>GET</td>
+                <td>Display all students in a table</td>
+            </tr>
+            <tr>
+                <td>Create()</td>
+                <td>GET</td>
+                <td>Show form to add new student</td>
+            </tr>
+            <tr>
+                <td>Create(Student s)</td>
+                <td>POST</td>
+                <td>Save new student with validation</td>
+            </tr>
+            <tr>
+                <td>Edit(int id)</td>
+                <td>GET</td>
+                <td>Load student for editing</td>
+            </tr>
+            <tr>
+                <td>Edit(Student s)</td>
+                <td>POST</td>
+                <td>Update student details</td>
+            </tr>
+            <tr>
+                <td>Delete(int id)</td>
+                <td>GET</td>
+                <td>Delete student and their tasks</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h4>B. TasksController</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Action</th>
+                <th>HTTP Method</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Index()</td>
+                <td>GET</td>
+                <td>Display all tasks with student names</td>
+            </tr>
+            <tr>
+                <td>Create()</td>
+                <td>GET</td>
+                <td>Show form to add new task (with student dropdown)</td>
+            </tr>
+            <tr>
+                <td>Create(Task t)</td>
+                <td>POST</td>
+                <td>Save new task with validation</td>
+            </tr>
+            <tr>
+                <td>MarkComplete(int id)</td>
+                <td>GET</td>
+                <td>Toggle task completion status</td>
+            </tr>
+            <tr>
+                <td>Delete(int id)</td>
+                <td>GET</td>
+                <td>Delete a task</td>
+            </tr>
+            <tr>
+                <td>StudentTasks(int studentId)</td>
+                <td>GET</td>
+                <td>Show all tasks for a specific student</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h3>3. Views (20 Points)</h3>
+
+    <h4>Required Views</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>View</th>
+                <th>Description</th>
+                <th>Elements</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Students/Index.cshtml</td>
+                <td>List all students</td>
+                <td>Table with Name, Email, Roll Number, Department, Actions (Edit, Delete, View Tasks)</td>
+            </tr>
+            <tr>
+                <td>Students/Create.cshtml</td>
+                <td>Add new student</td>
+                <td>Form with all student fields, validation messages</td>
+            </tr>
+            <tr>
+                <td>Students/Edit.cshtml</td>
+                <td>Edit student</td>
+                <td>Pre-filled form with student data</td>
+            </tr>
+            <tr>
+                <td>Tasks/Index.cshtml</td>
+                <td>List all tasks</td>
+                <td>Table with Title, Student Name, Due Date, Priority, Status, Actions</td>
+            </tr>
+            <tr>
+                <td>Tasks/Create.cshtml</td>
+                <td>Add new task</td>
+                <td>Form with dropdown for student selection</td>
+            </tr>
+            <tr>
+                <td>Tasks/StudentTasks.cshtml</td>
+                <td>Tasks for specific student</td>
+                <td>Table showing all tasks for selected student</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h3>4. Database Setup (15 Points)</h3>
+
+    <h4>Migration and Database Creation</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Step</th>
+                <th>Command</th>
+                <th>Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Add-Migration InitialCreate</td>
+                <td>Create migration files</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Update-Database</td>
+                <td>Create database and tables</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Seed Data (Optional)</td>
+                <td>Add 3 sample students and 5 sample tasks</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h4>Connection String Configuration</h4>
+    <pre><code>"ConnectionStrings": {
+  "DefaultConnection": "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=TaskManagementDB;Integrated Security=True"
+}</code></pre>
+
+    <hr>
+
+    <h3>5. LINQ Queries (15 Points)</h3>
+    <p>Implement the following queries:</p>
+
+    <h4>Query Requirements</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Query</th>
+                <th>Purpose</th>
+                <th>Implementation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Get all tasks with student info</td>
+                <td>Display tasks with student names</td>
+                <td>Use JOIN or Include()</td>
+            </tr>
+            <tr>
+                <td>Filter tasks by student</td>
+                <td>Show tasks for specific student</td>
+                <td>Where() clause with StudentId</td>
+            </tr>
+            <tr>
+                <td>Get pending tasks</td>
+                <td>Show incomplete tasks</td>
+                <td>Where(t => t.IsCompleted == false)</td>
+            </tr>
+            <tr>
+                <td>Sort by due date</td>
+                <td>Order tasks by urgency</td>
+                <td>OrderBy(t => t.DueDate)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h2>Time Breakdown</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Task</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Project Setup</td>
+                <td>Create project, install EF Core, configure connection string</td>
+            </tr>
+            <tr>
+                <td>Models Creation</td>
+                <td>Create Student and Task models with data annotations</td>
+            </tr>
+            <tr>
+                <td>Database Context</td>
+                <td>Create DbContext, add DbSets, create migration, update database</td>
+            </tr>
+            <tr>
+                <td>Students Controller</td>
+                <td>Implement all CRUD operations for students</td>
+            </tr>
+            <tr>
+                <td>Tasks Controller</td>
+                <td>Implement all task operations including LINQ queries</td>
+            </tr>
+            <tr>
+                <td>Students Views</td>
+                <td>Create Index, Create, and Edit views</td>
+            </tr>
+            <tr>
+                <td>Tasks Views</td>
+                <td>Create Index, Create, and StudentTasks views</td>
+            </tr>
+            <tr>
+                <td>Testing and Debugging</td>
+                <td>Test all features, fix bugs, validate forms</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h2>Evaluation Criteria</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Component</th>
+                <th>Points</th>
+                <th>Criteria</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Models</td>
+                <td>20</td>
+                <td>Proper annotations, foreign key relationship</td>
+            </tr>
+            <tr>
+                <td>Controllers</td>
+                <td>30</td>
+                <td>All CRUD operations working correctly</td>
+            </tr>
+            <tr>
+                <td>Views</td>
+                <td>20</td>
+                <td>Forms, tables, validation display</td>
+            </tr>
+            <tr>
+                <td>Database</td>
+                <td>15</td>
+                <td>Migrations, connection, data persistence</td>
+            </tr>
+            <tr>
+                <td>LINQ Queries</td>
+                <td>15</td>
+                <td>Correct queries for filtering and joining</td>
+            </tr>
+        </tbody>
+    </table>
+    <p><strong>Total: 100 Points</strong></p>
+
+    <hr>
+
+    <h2>Deliverables</h2>
+    <ol>
+        <li>Complete Visual Studio solution with all source code</li>
+        <li>Database migration files</li>
+        <li>Working application that can:
+            <ul>
+                <li>Add, edit, and delete students</li>
+                <li>Create and manage tasks for students</li>
+                <li>View all tasks for a specific student</li>
+                <li>Mark tasks as complete/incomplete</li>
+            </ul>
+        </li>
+    </ol>
+
+    <hr>
+
+
+
+    <hr>
+
+    <h2>Tips for Success</h2>
+    <ul>
+        <li>Work in order: Models first, then database, then controllers, then views</li>
+        <li>Test each feature immediately after implementing it</li>
+        <li>Use proper naming conventions for clarity</li>
+        <li>Don't forget to call SaveChanges() after database modifications</li>
+        <li>Always check ModelState.IsValid before saving data</li>
+        <li>Use ToList() to execute LINQ queries</li>
+        <li>Keep views simple - focus on functionality</li>
+        <li>Use Bootstrap for quick styling without spending much time</li>
+    </ul>
+
+    <hr>
+
+    <h2>Bonus Features (Optional)</h2>
+    <p>If you finish early, try adding:</p>
+    <ul>
+        <li>Search functionality for students by name or department</li>
+        <li>Filter tasks by priority (High, Medium, Low)</li>
+        <li>Show overdue tasks in red color</li>
+        <li>Add a counter showing total tasks and completed tasks</li>
+    </ul>
+
+    <hr>
+
+    <h2>Submission Checklist</h2>
+    <ul>
+        <li>Project compiles without errors</li>
+        <li>Database migrations are included</li>
+        <li>All CRUD operations work correctly</li>
+        <li>Validation is working on forms</li>
+        <li>Can create tasks for students</li>
+        <li>Can view tasks filtered by student</li>
+        <li>Can mark tasks as complete</li>
+        <li>Code is properly indented and readable</li>
+    </ul>
+
+    <hr>
+
+    <div class="output-box">
+        <p><strong>Remember:</strong> Focus on getting the core functionality working rather than making it perfect. You can always enhance it later!</p>
+    </div>
+
+    <p><strong>Good Luck!</strong></p>
+
+</body>
+</html>
